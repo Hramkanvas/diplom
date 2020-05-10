@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+    <p>
+        What is the name of your new project?
+    </p>
+    <mat-form-field>
+        <mat-label>Project name</mat-label>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div>
