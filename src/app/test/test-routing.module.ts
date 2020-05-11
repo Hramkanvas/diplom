@@ -8,12 +8,7 @@ import { TestComponent } from '@app/test/test.component';
 
 const routes: Routes = [
     {
-        path: '', component: TestComponent ,
-        children: [
-            { path: 'scenario', component: ScenarioComponent },
-            { path: 'statistic', component: StatisticComponent },
-            { path: 'testrun', component: TestrunComponent}
-        ]
+        path: '', component: TestComponent
     }
 ];
 

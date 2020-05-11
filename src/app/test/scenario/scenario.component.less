@@ -4,10 +4,12 @@
 }
 
 .dp-test-scenario-body {
+  justify-content: center;
   display: flex;
-  padding-top: 1rem;
-  padding-left: 12rem;
-  padding-right: 12rem;
+
+  & * {
+    overflow: hidden;
+  }
 }
 
 .dp-test-scenario-cases {
@@ -17,4 +19,6 @@
 
 .dp-test-scenario-add-case-button {
   margin-left: auto;
+  position: fixed;
+  right: 25%
 }

@@ -7,6 +7,7 @@ export interface TestCaseStep {
 }
 
 export interface DialogTestCaseData {
+    priority: string;
     new: boolean;
     name: string;
     id: number;
@@ -16,14 +17,14 @@ export interface DialogTestCaseData {
 }
 
 @Component({
-    selector: 'dp-test-dialog',
-    templateUrl: 'dialogTestCase.component.html',
-    styleUrls: ['dialogTestCase.component.less']
+    selector: 'dp-testrun-dialog',
+    templateUrl: 'dialogTestRun.component.html',
+    styleUrls: ['dialogTestRun.component.less']
 })
-export class DialogTestCaseComponent {
+export class DialogTestRunComponent {
 
     constructor(
-        public dialogRef: MatDialogRef<DialogTestCaseComponent>,
+        public dialogRef: MatDialogRef<DialogTestRunComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogTestCaseData) {
     }
 

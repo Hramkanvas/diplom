@@ -3,25 +3,22 @@
     <p>
         ID: {{data.id}}
     </p>
-    <div class="dp-test-dialog-container">
-        <mat-form-field>
-            <mat-label>Test case name</mat-label>
-            <input matInput [(ngModel)]="data.name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Label</mat-label>
-            <input matInput [(ngModel)]="data.label">
-        </mat-form-field>
-    </div>
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Minor</mat-radio-button>
-        <mat-radio-button value="2">Major</mat-radio-button>
-        <mat-radio-button value="3">Blocker</mat-radio-button>
-    </mat-radio-group>
-    <mat-form-field class="dp-test-dialog-description">
-        <mat-label>Description</mat-label>
-        <textarea matInput [(ngModel)]="data.description"></textarea>
-    </mat-form-field>
+    <mat-label>Name</mat-label>
+    <p>
+        {{data.name}}
+    </p>
+    <mat-label>Label</mat-label>
+    <p>
+        {{data.label}}
+    </p>
+    <mat-label>Priority</mat-label>
+    <p>
+        {{data.priority}}
+    </p>
+    <mat-label>Description</mat-label>
+    <p>
+        {{data.description}}
+    </p>
     <ng-container *ngFor="let step of data.steps; let i = index">
         <div class="dp-test-dialog-step-container">
             <mat-form-field appearance="outline">

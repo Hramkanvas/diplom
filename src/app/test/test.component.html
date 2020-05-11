@@ -1,8 +1,21 @@
-<mat-toolbar class="test-toolbar" color="basic">
-    <a color="accent" routerLink="scenario" routerLinkActive="active" mat-raised-button>Test cases</a>
-    <a color="accent" routerLink="testrun" routerLinkActive="active" mat-raised-button>Test runs</a>
-    <a color="accent" routerLink="statistic" routerLinkActive="active" mat-raised-button>Results</a>
-</mat-toolbar>
-<div class="dp-test-body">
-    <router-outlet></router-outlet>
+<div>
+    <mat-tab-group mat-align-tabs="center" color="accent">
+        <mat-tab label="Test cases">
+            <div class="dp-test-content">
+                <dp-scenario></dp-scenario>
+            </div>
+        </mat-tab>
+        <mat-tab label="Test runs">
+            <div class="dp-test-content">
+                <dp-testrun></dp-testrun>
+            </div>
+        </mat-tab>
+        <mat-tab label="Results">
+            <ng-template matTabContent>
+                <div class="dp-test-content">
+                    <dp-statistic></dp-statistic>
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
 </div>
