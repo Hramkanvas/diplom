@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>Create test case</h1>
+<div mat-dialog-content class="dp-test-dialog-content-container">
+    <p>
+        ID: {{data.id}}
+    </p>
+    <div class="dp-test-dialog-container">
+        <mat-form-field>
+            <mat-label>Test case name</mat-label>
+            <input matInput [(ngModel)]="data.name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Label</mat-label>
+            <input matInput [(ngModel)]="data.label">
+        </mat-form-field>
+    </div>
+    <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1">Minor</mat-radio-button>
+        <mat-radio-button value="2">Major</mat-radio-button>
+        <mat-radio-button value="3">Blocker</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="dp-test-dialog-description">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="data.description"></textarea>
+    </mat-form-field>
+    <ng-container *ngFor="let step of data.steps; let i = index">
+        <div class="dp-test-dialog-step-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Step</mat-label>
+                <input matInput value="{{step.description}}" placeholder="Step description">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Result</mat-label>
+                <input matInput placeholder="Expected result">
+            </mat-form-field>
+            <button
+                    class="dp-test-dialog-delete-step-button"
+                    mat-icon-button
+                    color="accent"
+                    aria-label="add project"
+                    (click)="deleteStep(i)"
+            >
+                <mat-icon>delete_outline</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+    <button
+            class="dp-test-scenario-add-case-button"
+            mat-mini-fab
+            color="accent"
+            aria-label="add project"
+            (click)="addEmptyStep()"
+    >
+        <mat-icon>add</mat-icon>
+    </button>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

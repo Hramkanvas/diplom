@@ -1,0 +1,18 @@
+<div class="dp-test-testrun-container">
+    <p>In progress</p>
+    <ng-container *ngFor="let testCase of testCases">
+        <button class="dp-test-scenario-testcase-button" mat-stroked-button
+                (click)="openDialog(false)"
+        >
+            {{testCase}}
+        </button>
+    </ng-container>
+    <p>Finished</p>
+    <ng-container *ngFor="let testCase of tesstCases">
+        <button class="dp-test-scenario-testcase-button" mat-stroked-button
+                (click)="openDialog(false)"
+        >
+            {{testCase}}
+        </button>
+    </ng-container>
+</div>

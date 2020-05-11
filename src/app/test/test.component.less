@@ -1,0 +1,33 @@
+.test-toolbar {
+  align-items: center;
+  justify-content: center;
+
+  .mat-raised-button:last-child {
+    margin-right: 0;
+  }
+
+  .mat-raised-button {
+    margin-right: 3rem;
+    width: 8rem;
+    text-decoration: none;
+
+    &:hover {
+      box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+.dp-test-body {
+  margin: 0 13rem;
+}
+
+
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+.dp-test-content {
+  margin: 1rem 18% 1rem 18%;
+}
