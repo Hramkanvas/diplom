@@ -30,7 +30,7 @@ export class TestrunComponent implements OnInit {
 
     openDialog(newTestCase: boolean) {
         const dialogRef = this.dialog.open(DialogTestRunComponent, {
-            width: '500px',
+            width: '50%',
             data: newTestCase ? {
                 steps: [
                     {
@@ -39,16 +39,46 @@ export class TestrunComponent implements OnInit {
                     }
                 ]
             } : {
-                name: 'Name',
-                description: 'Description text a lot of text',
+                name: 'Application',
+                description: 'This is very strange behavior',
                 id: 12,
+                assign: 'Flin Ryder',
                 steps: [
+                    {
+                        description: 'Open navigation tab',
+                        result: 'Navigation tab is open'
+                    },
+                    {
+                        description: 'Type some text in input',
+                        result: 'Correct text inside of input'
+                    },
+                    {
+                        description: 'Do this',
+                        result: 'Should be like this'
+                    },
+                    {
+                        description: 'Do this',
+                        result: 'Should be like this'
+                    },
+                    {
+                        description: 'Do this',
+                        result: 'Should be like this'
+                    },
+                    {
+                        description: 'Do this',
+                        result: 'Should be like this'
+                    },
+                    {
+                        description: 'Do this',
+                        result: 'Should be like this'
+                    },
                     {
                         description: 'Do this',
                         result: 'Should be like this'
                     }
                 ],
-                label: 'monday'
+                priority: 'Major',
+                label: 'Monday'
             }
         });
         dialogRef.afterClosed().subscribe(result => {

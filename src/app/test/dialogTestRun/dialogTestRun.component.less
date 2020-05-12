@@ -14,20 +14,53 @@
 
 .dp-test-dialog-step-container {
   display: flex;
+  align-items: baseline;
+
+  & > * {
+    margin-right: .6rem;
+  }
 
   & > *:first-child {
-    margin-right: .6rem;
+    margin-right: 1.3rem;
   }
 
   .dp-test-dialog-delete-step-button {
     margin: .5rem 0;
   }
-
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
 }
 
 .dp-test-scenario-add-case-button {
   margin: .8rem 0;
+}
+
+.dp-test-dialog-run-info {
+  display: flex;
+}
+
+.dp-test-dialog-run-left {
+  opacity: .7;
+}
+
+.dp-test-dialog-run-right {
+  margin-left: 1rem;
+}
+
+.dp-test-dialog-run-header {
+  width: 100%;
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+
+  & > * {
+    margin-right: .6rem;
+    font-weight: bold;
+  }
+
+  & > *:not(:first-child) {
+    min-width: 180px;
+  }
+}
+
+.dp-test-dialog-run-select {
+  margin-left: 1.2rem;
 }

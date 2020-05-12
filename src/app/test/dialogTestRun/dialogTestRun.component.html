@@ -1,57 +1,56 @@
-<h1 mat-dialog-title>Create test case</h1>
+<h1 mat-dialog-title>{{data.name}}</h1>
 <div mat-dialog-content class="dp-test-dialog-content-container">
-    <p>
-        ID: {{data.id}}
-    </p>
-    <mat-label>Name</mat-label>
-    <p>
-        {{data.name}}
-    </p>
-    <mat-label>Label</mat-label>
-    <p>
-        {{data.label}}
-    </p>
-    <mat-label>Priority</mat-label>
-    <p>
-        {{data.priority}}
-    </p>
-    <mat-label>Description</mat-label>
-    <p>
-        {{data.description}}
-    </p>
+    <div class="dp-test-dialog-run-info">
+        <span class="dp-test-dialog-run-left">
+            <p>ID:</p>
+            <p>Label:</p>
+            <p>Assign:</p>
+            <p>Priority:</p>
+            <p>Description</p>
+        </span>
+        <span class="dp-test-dialog-run-right">
+            <p>{{data.id}}</p>
+            <p>{{data.label}}</p>
+            <p>{{data.assign}}</p>
+            <p>{{data.priority}}</p>
+            <p>{{data.description}}</p>
+        </span>
+    </div>
+    <div class="dp-test-dialog-run-header">
+        <p>No.</p>
+        <p>Description</p>
+        <p>Expected result</p>
+        <p>Actual result</p>
+    </div>
     <ng-container *ngFor="let step of data.steps; let i = index">
         <div class="dp-test-dialog-step-container">
-            <mat-form-field appearance="outline">
-                <mat-label>Step</mat-label>
-                <input matInput value="{{step.description}}" placeholder="Step description">
+            <p>{{i}}.</p>
+            <mat-form-field appearance="standard">
+                <textarea readonly matInput>{{step.description}}</textarea>
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Result</mat-label>
-                <input matInput placeholder="Expected result">
+
+            <mat-form-field appearance="standard">
+                <textarea readonly matInput>{{step.result}}</textarea>
             </mat-form-field>
-            <button
-                    class="dp-test-dialog-delete-step-button"
-                    mat-icon-button
-                    color="accent"
-                    aria-label="add project"
-                    (click)="deleteStep(i)"
-            >
-                <mat-icon>delete_outline</mat-icon>
-            </button>
+
+            <mat-form-field appearance="standard">
+                <textarea matInput placeholder="Actual result"></textarea>
+            </mat-form-field>
+
         </div>
     </ng-container>
-    <button
-            class="dp-test-scenario-add-case-button"
-            mat-mini-fab
-            color="accent"
-            aria-label="add project"
-            (click)="addEmptyStep()"
-    >
-        <mat-icon>add</mat-icon>
-    </button>
-
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button>Save</button>
+    <button mat-button [mat-dialog-close]="data">Move to finished</button>
+    <mat-form-field class="dp-test-dialog-run-select">
+        <mat-label>Status</mat-label>
+        <mat-select matNativeControl required>
+            <mat-option value="passed">Passed</mat-option>
+            <mat-option value="retest">Retest</mat-option>
+            <mat-option value="blocked">Blocked</mat-option>
+            <mat-option value="failed">Failed</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>

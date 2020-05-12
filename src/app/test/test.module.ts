@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { DialogTestRunComponent } from '@app/test/dialogTestRun/dialogTestRun.component';
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MatTabsModule } from "@angular/material/tabs";
         FormsModule,
         MatSelectModule,
         MatRadioModule,
-        MatTabsModule
+        MatTabsModule,
+        MatCardModule
     ]
 })
 export class TestModule {
