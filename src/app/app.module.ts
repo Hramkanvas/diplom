@@ -13,6 +13,7 @@ import { AlertComponent } from './_components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from '@app/home/home.module';
 import { TestModule } from '@app/test/test.module';
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { TestModule } from '@app/test/test.module';
         AppRoutingModule,
         BrowserAnimationsModule,
         HomeModule,
-        TestModule
+        TestModule,
+        MatIconModule
     ],
     declarations: [
         AppComponent,

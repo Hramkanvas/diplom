@@ -1,3 +1,18 @@
+<button
+        class="dp-test-scenario-add-case-button"
+        mat-mini-fab
+        color="accent"
+        aria-label="add project"
+        (click)="openDialog(true)"
+>
+    <mat-icon>add</mat-icon>
+</button>
+<div class="dp-test-scenario-header">
+    <mat-form-field class="dp-test-scenario-search">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+    </mat-form-field>
+</div>
 <div class="dp-test-scenario-body">
     <div class="dp-test-scenario-cases">
         <ng-container *ngFor="let testCase of testCases">
@@ -8,13 +23,4 @@
             </button>
         </ng-container>
     </div>
-    <button
-        class="dp-test-scenario-add-case-button"
-        mat-mini-fab
-        color="accent"
-        aria-label="add project"
-        (click)="openDialog(true)"
-    >
-        <mat-icon>add</mat-icon>
-    </button>
 </div>

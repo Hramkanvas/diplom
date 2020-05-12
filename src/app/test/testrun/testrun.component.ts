@@ -77,6 +77,7 @@ export class TestrunComponent implements OnInit {
                         result: 'Should be like this'
                     }
                 ],
+                priority: 'Major',
                 label: 'Monday'
             }
         });

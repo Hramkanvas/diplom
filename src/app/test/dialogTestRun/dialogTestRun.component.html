@@ -1,16 +1,20 @@
 <h1 mat-dialog-title>{{data.name}}</h1>
 <div mat-dialog-content class="dp-test-dialog-content-container">
     <div class="dp-test-dialog-run-info">
-    <span class="dp-test-dialog-run-left">
-        <p>ID:</p>
-        <p>Label</p>
-        <p>Assign</p>
-    </span>
+        <span class="dp-test-dialog-run-left">
+            <p>ID:</p>
+            <p>Label:</p>
+            <p>Assign:</p>
+            <p>Priority:</p>
+            <p>Description</p>
+        </span>
         <span class="dp-test-dialog-run-right">
-        <p>{{data.id}}</p>
-        <p>{{data.label}}</p>
-        <p>{{data.assign}}</p>
-    </span>
+            <p>{{data.id}}</p>
+            <p>{{data.label}}</p>
+            <p>{{data.assign}}</p>
+            <p>{{data.priority}}</p>
+            <p>{{data.description}}</p>
+        </span>
     </div>
     <div class="dp-test-dialog-run-header">
         <p>No.</p>
@@ -24,6 +28,7 @@
             <mat-form-field appearance="standard">
                 <textarea readonly matInput>{{step.description}}</textarea>
             </mat-form-field>
+
             <mat-form-field appearance="standard">
                 <textarea readonly matInput>{{step.result}}</textarea>
             </mat-form-field>
@@ -34,13 +39,12 @@
 
         </div>
     </ng-container>
-
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button mat-button>Save</button>
     <button mat-button [mat-dialog-close]="data">Move to finished</button>
-    <mat-form-field>
+    <mat-form-field class="dp-test-dialog-run-select">
         <mat-label>Status</mat-label>
         <mat-select matNativeControl required>
             <mat-option value="passed">Passed</mat-option>
