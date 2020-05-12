@@ -7,6 +7,7 @@ export interface TestCaseStep {
 }
 
 export interface DialogTestCaseData {
+    assign: string;
     priority: string;
     new: boolean;
     name: string;
@@ -22,6 +23,8 @@ export interface DialogTestCaseData {
     styleUrls: ['dialogTestRun.component.less']
 })
 export class DialogTestRunComponent {
+
+    displayedColumns = ['id', 'description', 'result'];
 
     constructor(
         public dialogRef: MatDialogRef<DialogTestRunComponent>,
