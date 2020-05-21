@@ -106,7 +106,7 @@ async function updateTestcase(testcaseParams) {
         testcaseParams.steps.forEach(step => {
             lastStepID += 1;
             step.id = lastStepID.toString();
-            step.testcaseID = lastID.toString();
+            step.testcaseID = testcaseParams.id.toString();
             steps.push(step);
         })
     }

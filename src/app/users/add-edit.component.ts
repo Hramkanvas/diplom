@@ -78,6 +78,7 @@ export class AddEditComponent implements OnInit {
                 data => {
                     this.alertService.success('User added successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['.', { relativeTo: this.route }]);
+
                 },
                 error => {
                     this.alertService.error(error);
