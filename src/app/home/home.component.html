@@ -1,14 +1,16 @@
 ﻿<div class="dp-home-page">
     <div class="dp-home-projects">
-        <a routerLink="/test" routerLinkActive="active" mat-raised-button>First project</a>
-        <a mat-raised-button>Second project</a>
-        <a mat-raised-button>Third project</a>
-        <a mat-raised-button>Other project</a>
-        <a mat-raised-button>One more project</a>
-        <a mat-raised-button>Second more project</a>
-        <a mat-raised-button>Come on project</a>
-        <a mat-raised-button>Enough project</a>
-        <a mat-raised-button>Final project</a>
+        <ng-container *ngFor="let project of projects">
+            <div style="position: relative">
+                <a routerLink="/test" routerLinkActive="active" (click)="openProject(project.id)" mat-raised-button>{{project.name}}
+                </a>
+                <button style="position: absolute; right: 6%;color: gray;bottom: 34%;"
+                        mat-icon-button (click)="deleteProject(project.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+        </ng-container>
     </div>
     <button class="dp-home-add-project-button" mat-mini-fab color="accent" aria-label="add project"
             (click)="openDialog()">

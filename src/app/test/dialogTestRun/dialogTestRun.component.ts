@@ -1,17 +1,21 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TestService } from '@app/_services/test.service';
 
 export interface TestCaseStep {
+    actualResult: string;
     description: string;
-    result: string;
+    expectedResult: string;
 }
 
 export interface DialogTestCaseData {
+    status: string;
     assign: string;
     priority: string;
     new: boolean;
     name: string;
     id: number;
+    finished: boolean;
     label: string;
     description: string;
     steps: Array<TestCaseStep>;
@@ -22,25 +26,33 @@ export interface DialogTestCaseData {
     templateUrl: 'dialogTestRun.component.html',
     styleUrls: ['dialogTestRun.component.less']
 })
-export class DialogTestRunComponent {
+export class DialogTestRunComponent implements OnInit{
 
-    displayedColumns = ['id', 'description', 'result'];
 
     constructor(
+        private testService: TestService,
         public dialogRef: MatDialogRef<DialogTestRunComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogTestCaseData) {
+    }
+
+    ngOnInit(): void {
+        this.testService.getSteps(this.data.id.toString()).pipe().subscribe(
+            steps => this.data.steps = steps,
+            error => console.log(error)
+        );
     }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
-    addEmptyStep() {
-        this.data.steps.push({description: '', result: ''});
+    onMoveToFinish() {
+        this.data.finished = true;
+        this.dialogRef.close(this.data);
     }
 
-    deleteStep(id: number) {
-        this.data.steps.splice(id, 1);
-        console.log(id);
+    onMoveToProcess() {
+        this.data.finished = false;
+        this.dialogRef.close(this.data);
     }
 }

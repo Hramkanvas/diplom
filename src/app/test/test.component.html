@@ -1,14 +1,18 @@
 <div>
     <mat-tab-group mat-align-tabs="center" color="accent">
         <mat-tab label="Test cases">
-            <div class="dp-test-content">
-                <dp-scenario></dp-scenario>
-            </div>
+            <ng-template matTabContent>
+                <div class="dp-test-content">
+                    <dp-scenario></dp-scenario>
+                </div>
+            </ng-template>
         </mat-tab>
         <mat-tab label="Test runs">
-            <div class="dp-test-content">
-                <dp-testrun></dp-testrun>
-            </div>
+            <ng-template matTabContent>
+                <div class="dp-test-content">
+                    <dp-testrun></dp-testrun>
+                </div>
+            </ng-template>
         </mat-tab>
         <mat-tab label="Results">
             <ng-template matTabContent>

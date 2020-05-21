@@ -30,11 +30,11 @@
             </mat-form-field>
 
             <mat-form-field appearance="standard">
-                <textarea readonly matInput>{{step.result}}</textarea>
+                <textarea readonly matInput>{{step.expectedResult}}</textarea>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
-                <textarea matInput placeholder="Actual result"></textarea>
+                <textarea matInput value="{{step.actualResult}}" [(ngModel)]="step.actualResult" placeholder="Actual result"></textarea>
             </mat-form-field>
 
         </div>
@@ -42,15 +42,16 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button>Save</button>
-    <button mat-button [mat-dialog-close]="data">Move to finished</button>
+    <button mat-button [mat-dialog-close]="data">Save</button>
+    <button *ngIf="!data.finished" mat-button (click)="onMoveToFinish()">Move to finished</button>
+    <button *ngIf="data.finished" mat-button (click)="onMoveToProcess()">Move to in process</button>
     <mat-form-field class="dp-test-dialog-run-select">
         <mat-label>Status</mat-label>
-        <mat-select matNativeControl required>
-            <mat-option value="passed">Passed</mat-option>
-            <mat-option value="retest">Retest</mat-option>
-            <mat-option value="blocked">Blocked</mat-option>
-            <mat-option value="failed">Failed</mat-option>
+        <mat-select [(ngModel)]="data.status" matNativeControl required>
+            <mat-option value="Passed">Passed</mat-option>
+            <mat-option value="Retest">Retest</mat-option>
+            <mat-option value="Blocked">Blocked</mat-option>
+            <mat-option value="Failed">Failed</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
