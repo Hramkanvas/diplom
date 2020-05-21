@@ -31,6 +31,7 @@ module.exports = {
 };
 
 async function authenticate({ username, password }) {
+
     const user = users.filter(user => user.username === username)[0];
     console.log(password);
     console.log(user.hash);
@@ -50,7 +51,8 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return users.filter(user => user.id === id)[0];
+    console.log('users', users);
+    return users.filter(user => user.hash === id)[0];
 }
 
 async function create(userParam) {
@@ -58,7 +60,7 @@ async function create(userParam) {
     nn.username = userParam.username;
     nn.firstName = userParam.firstName;
     nn.lastName = userParam.lastName;
-    nn.createdDate = new Date()
+    nn.createdDate = new Date();
     lastID += 1;
     nn.id = lastID.toString();
     nn.hash = userParam.password;
