@@ -10,17 +10,28 @@
 <div class="dp-test-scenario-header">
     <mat-form-field class="dp-test-scenario-search">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <input (keyup)="search($event)" matInput placeholder="Search">
     </mat-form-field>
 </div>
 <div class="dp-test-scenario-body">
     <div class="dp-test-scenario-cases">
-        <ng-container *ngFor="let testCase of testCases">
+        <ng-container *ngFor="let testcase of filteredTestcases">
+            <div style="display: flex">
             <button class="dp-test-scenario-testcase-button" mat-stroked-button
-                    (click)="openDialog(false)"
+                    (click)="openDialog(false, testcase)"
             >
-                {{testCase}}
+                {{testcase.name}}
             </button>
+            <button
+                    class="dp-test-dialog-delete-step-button"
+                    mat-icon-button
+                    color="accent"
+                    aria-label="add project"
+                    (click)="deleteTestcase(testcase.id)"
+            >
+                <mat-icon>delete_outline</mat-icon>
+            </button>
+            </div>
         </ng-container>
     </div>
 </div>

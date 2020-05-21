@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTestRunComponent } from '@app/test/dialogTestRun/dialogTestRun.component';
+import { Testcase } from "@app/_models/testcase";
+import { TestService } from "@app/_services/test.service";
 
 @Component({
     selector: 'dp-testrun',
@@ -8,81 +10,43 @@ import { DialogTestRunComponent } from '@app/test/dialogTestRun/dialogTestRun.co
     styleUrls: ['./testrun.component.less']
 })
 export class TestrunComponent implements OnInit {
-    testCases = [
-        'First test case',
-        'Second test case',
-        'Third test case',
-        'Forth test case',
-        'Random long name of test case'];
+    testcases: Array<Testcase>;
 
-    tesstCases = [
-        'Another test case',
-        '34 test case',
-        'Important case',
-        'F54',
-        'RRR34342 2342'];
-
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog, private testService: TestService) {
     }
 
     ngOnInit(): void {
+        this.testService.getAll(localStorage.getItem('currentProject')).pipe().subscribe(
+            data => {
+                this.testcases = data;
+            },
+            error => {
+                console.log('cant get all testcases');
+            }
+        );
     }
 
-    openDialog(newTestCase: boolean) {
+    openDialog(testcase: Testcase) {
         const dialogRef = this.dialog.open(DialogTestRunComponent, {
             width: '50%',
-            data: newTestCase ? {
-                steps: [
-                    {
-                        description: '',
-                        result: ''
-                    }
-                ]
-            } : {
-                name: 'Application',
-                description: 'This is very strange behavior',
-                id: 12,
-                assign: 'Flin Ryder',
-                steps: [
-                    {
-                        description: 'Open navigation tab',
-                        result: 'Navigation tab is open'
-                    },
-                    {
-                        description: 'Type some text in input',
-                        result: 'Correct text inside of input'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    },
-                    {
-                        description: 'Do this',
-                        result: 'Should be like this'
-                    }
-                ],
-                priority: 'Major',
-                label: 'Monday'
-            }
+            data: testcase
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
+            if (result) {
+                this.testService.updateTestcase(result).pipe().subscribe(
+                    ok => {
+                        this.testService.getAll(localStorage.getItem('currentProject')).pipe().subscribe(
+                            data => {
+                                this.testcases = data;
+                            },
+                            error => {
+                                console.log('cant get all testcases');
+                            }
+                        );
+                    },
+                    error => console.log('smth wrong with updating')
+                );
+            }
         });
     }
 }
