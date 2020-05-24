@@ -25,7 +25,10 @@ function updateTestcase(req, res, next) {
 
 function getAll(req, res, next) {
     testService.getAll(req.params.id)
-        .then(projects => res.json(projects))
+        .then(projects => {
+            console.log(projects);
+            res.send(projects)
+        })
         .catch(err => next(err));
 }
 

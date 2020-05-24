@@ -12,13 +12,15 @@ module.exports = router;
 
 function create(req, res, next) {
     userService.create(req.body)
-        .then(() => res.json({}))
+        .then((data) => {
+            res.send(data)
+        })
         .catch(err => next(err));
 }
 
 function getAll(req, res, next) {
     userService.getAll()
-        .then(projects => res.json(projects))
+        .then(projects => res.send(projects))
         .catch(err => next(err));
 }
 

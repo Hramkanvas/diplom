@@ -18,6 +18,7 @@ export class TestrunComponent implements OnInit {
     ngOnInit(): void {
         this.testService.getAll(localStorage.getItem('currentProject')).pipe().subscribe(
             data => {
+                console.log(data);
                 this.testcases = data;
             },
             error => {

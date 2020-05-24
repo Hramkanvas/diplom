@@ -1,17 +1,8 @@
 const testService = require('../test/test.service');
-
-var projects = [
-    {
-        id: "1",
-        name: "First project",
-    },
-    {
-        id: "2",
-        name: "Second project"
-    }
-]
-
-var lastID = 2;
+const db = require("../models");
+const Project = db.projects;
+const Testcase = db.testcases;
+const Op = db.Sequelize.Op;
 
 module.exports = {
     getAll,
@@ -19,25 +10,23 @@ module.exports = {
     delete: _delete
 };
 
-
 async function getAll() {
-    return projects;
+    return Project.findAll({ attributes: ['name', 'id']});
 }
 
 async function create(projectParams) {
-    lastID += 1;
     const newProject = {
-        name: projectParams.name,
-        id: lastID.toString()
+        name: projectParams.name
     }
-    projects.push(newProject);
+    return Project.create(newProject);
 }
 
 async function _delete(id) {
-    projects = projects.filter(project => {
-        if (project.id === id) {
-            testService.delete(id);
-        }
-        return project.id !== id;
+    await Project.destroy({where: {id: id}})
+    const arrayOfCases = await testService.getAll(id);
+    const arrayOfPromises = []
+    arrayOfCases.forEach(elem => {
+        arrayOfPromises.push(testService.delete(elem.id))
     })
+    await Promise.all(arrayOfPromises);
 }
