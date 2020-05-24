@@ -25,6 +25,9 @@ app.use('/test', require('./test/test.controller'));
 // global error handler
 app.use(errorHandler);
 
+const db = require("./models");
+db.sequelize.sync();
+
 // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
 const server = app.listen(port, function () {

@@ -6,7 +6,7 @@ import { AccountService, AlertService } from '@app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { HomeService } from '@app/_services/home.service';
 
-@Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.less'] })
+@Component({templateUrl: 'home.component.html', styleUrls: ['home.component.less']})
 export class HomeComponent implements OnInit {
     name: string;
     animal: string;
@@ -35,20 +35,22 @@ export class HomeComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(name => {
-            this.homeService.create({name}).pipe().subscribe(
-                next => {
-                    console.log(next);
-                    this.homeService.getAll().pipe().subscribe(
-                        data => {
-                            this.projects = data;
-                        },
-                        error => {
-                            console.log('something wrong with projects');
-                        }
-                    );
-                },
-                error => console.log(error)
-            );
+            if (name) {
+                this.homeService.create({name}).pipe().subscribe(
+                    next => {
+                        console.log(next);
+                        this.homeService.getAll().pipe().subscribe(
+                            data => {
+                                this.projects = data;
+                            },
+                            error => {
+                                console.log('something wrong with projects');
+                            }
+                        );
+                    },
+                    error => console.log(error)
+                );
+            }
         });
     }
 

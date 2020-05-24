@@ -9,11 +9,11 @@
             <p>Description</p>
         </span>
         <span class="dp-test-dialog-run-right">
-            <p>{{data.id}}</p>
-            <p>{{data.label}}</p>
-            <p>{{data.assign}}</p>
-            <p>{{data.priority}}</p>
-            <p>{{data.description}}</p>
+            <p>{{data.id || 'none'}}</p>
+            <p>{{data.label || 'none'}}</p>
+            <p>{{data.assign || 'none'}}</p>
+            <p>{{data.priority || 'none'}}</p>
+            <p>{{data.description || 'none'}}</p>
         </span>
     </div>
     <div class="dp-test-dialog-run-header">

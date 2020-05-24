@@ -1,5 +1,9 @@
 ﻿const config = require('config.json');
 const jwt = require('jsonwebtoken');
+const db = require("../models");
+const User = db.users;
+const Op = db.Sequelize.Op;
+
 const users = [
     {
         id: "1",
@@ -30,29 +34,35 @@ module.exports = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
+async function authenticate({username, password}) {
 
-    const user = users.filter(user => user.username === username)[0];
-    console.log(password);
-    console.log(user.hash);
-    console.log(user);
+    const user = await User.findOne({where: {username: {[Op.like]: `%${username}%`}}})
     if (user && password == user.hash) {
-        const token = jwt.sign({ sub: user.hash }, config.secret);
+        const token = jwt.sign({sub: user.hash}, config.secret);
         return {
-            ...user,
-            token
+            username: user.username,
+            token,
+            lastName: user.lastName,
+            firstName: user.firstName,
+            id: user.id
         };
     }
 
 }
 
 async function getAll() {
-    return users;
+    return User.findAll({
+        attributes: [
+            "username",
+            "lastName",
+            "firstName",
+            "id"
+        ]
+    });
 }
 
-async function getById(id) {
-    console.log('users', users);
-    return users.filter(user => user.hash === id)[0];
+async function getById(hash) {
+    return User.findOne({where: {hash: {[Op.like]: `%${hash}%`}}})
 }
 
 async function create(userParam) {
@@ -60,14 +70,10 @@ async function create(userParam) {
     nn.username = userParam.username;
     nn.firstName = userParam.firstName;
     nn.lastName = userParam.lastName;
-    nn.createdDate = new Date();
-    lastID += 1;
-    nn.id = lastID.toString();
     nn.hash = userParam.password;
-    users.push(nn);
+    User.create(nn)
 }
 
 async function _delete(id) {
-    // await User.findByIdAndRemove(id);
-    console.log('delete')
+    return User.destroy({where: {id: id}})
 }
